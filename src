@@ -1,0 +1,9 @@
+src/utils.py
+import yfinance as yf
+import pandas as pd
+
+def fetch_price_data(ticker, start, end=None):
+    return yf.download(ticker, start=start, end=end, auto_adjust=True, progress=False)
+
+def compute_log_returns(prices):
+    return (prices / prices.shift(1)).apply(lambda x: pd.NA if pd.isna(x) else pd.np.log(x))
